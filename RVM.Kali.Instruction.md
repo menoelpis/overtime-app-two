@@ -28,7 +28,7 @@
 
 - [root] $ rails -v 
 
-- [root] $ apt-get install libxslt-dev libxml2-dev 
+- [root] $ apt-get install libxslt-dev libxml2-dev libpq-dev
 
 - [root] $ sudo apt-get install sqlite3 libsqlite3-dev 
 

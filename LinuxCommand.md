@@ -7,3 +7,11 @@
 # Kill PID
 
 - kill -9 [PID]
+
+# Ensure the ssh-agent is enabled
+
+- $ eval "$(ssh-agent -s)"
+
+# Add your SSH key to the ssh-agent
+
+- $ ssh-add ~/.ssh/id_rsa

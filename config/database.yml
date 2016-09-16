@@ -4,7 +4,8 @@ development:
   database: overtime
   pool: 5
   username: john
-  password: shema
+  password: shema  
+  template: template0
 
 test:
   adapter: postgresql
@@ -13,6 +14,7 @@ test:
   pool: 5
   username: john  
   password: shema
+  template: template0
 
 production:
   adapter: postgresql

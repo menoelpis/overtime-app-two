@@ -10,7 +10,7 @@
 
 # Features:
 
--Approval Workflow
+- Approval Workflow
 - SMS Sending -> link to approval or overtime input
 - Administrate admin dashboard
 - Block non admin adn guest users

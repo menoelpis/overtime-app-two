@@ -18,8 +18,8 @@
 # Rspec Installation
 
 - $ rails generate rspec:install
-- [x] delete test folder
-- [+:> spec/rails_helper.rb] 
+- ![sub](minus.png) delete test folder
+- ![add](plus.png) [spec/rails_helper.rb] 
 	ENV['RAILS_ENV'] ||= 'test'
 	require File.expand_path('../../config/environment', __FILE__)
 

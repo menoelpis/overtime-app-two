@@ -159,10 +159,84 @@ end
 def create
   @post = Post.new(params.require(:post).permit(:date, :rationale))
   @post.save
-  redirect_to @gitpost
+  redirect_to @post
 end
 
 def show
   @post = Post.find(params[:id])
+end
+```
+
+- ![edit](edit.png) [app/controllers/posts_controller.rb]
+```rb
+class PostsController < ApplicationController
+  before_action :set_post, only: [:show]
+  
+  def index
+  end
+
+  def new
+    @post = Post.new
+  end
+
+  def create
+    @post = Post.new(post_params)
+    if @post.save
+      redirect_to @post, notice: 'Your post was created successfully'
+    else
+      render :new
+    end
+  end
+
+  def show
+  end
+
+  private
+
+    def post_params
+      params.require(:post).permit(:date, :rationale)
+    end
+
+    def set_post
+      @post = Post.find(params[:id])
+    end
+end
+```
+- ![edit](edit.png) [spec/features/post_spec.rb]
+```rb
+require 'rails_helper'
+
+describe 'navigate' do
+  
+  describe 'homepage' do
+    it 'can be reached successfully' do
+      visit root_path
+      expect(page.status_code).to eq(200)
+    end
+
+    it 'has a title of Post Index' do
+      visit posts_path
+      expect(page).to have_content(/Posts Index/)
+    end
+  end
+
+  describe 'creation' do
+    before do
+      visit new_post_path
+    end
+
+    it 'has a new form that can be reached' do
+      expect(page.status_code).to eq(200)
+    end
+
+    it 'can be created from new form page' do
+      fill_in 'post[date]', with: Date.today
+      fill_in 'post[rationale]', with: "Some Rationale"
+      click_on "Save"
+
+      expect(page).to have_content("Some Rationale")
+    end
+  end
+
 end
 ```

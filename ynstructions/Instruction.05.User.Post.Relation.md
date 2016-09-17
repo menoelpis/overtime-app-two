@@ -101,3 +101,19 @@ end
 ```
 
 - $ rspec [which will succeed!]
+
+- ![add](plus.png) [app/controllers/application_controller.rb]
+```rb
+class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+  before_action :authenticate_user! <<<
+end
+```
+** It will authenticate all users 
+
+- $ rails console
+- >> User.create!(first_name: "Daniel"...)
+
+- $ rails server
+- [localhost:3000/users/sign_in] Sign In with Info Above
+- Enter information -> Test

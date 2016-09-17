@@ -7,7 +7,7 @@
 - ![sub](minus.png) [spec/helpers/posts_helper_spec.rb]
 - ![sub](minus.png) [spec/controllers/*]
 - ![add](plus.png) [spec/factories/posts.rb]
-```ruby
+```rb
 FactoryGirl.define do
   factory :post do
     date Date.today
@@ -16,7 +16,7 @@ FactoryGirl.define do
 end
 ```
 - ![add](plus.png) [spec/model/post_spec.rb]
-```ruby
+```rb
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
@@ -42,12 +42,12 @@ RSpec.describe Post, type: :model do
 end
 ```
 - ![add](plus.png) [app/models/post.rb] 
-```ruby
+```rb
 validates_presence_of :date, :rationale
 ```
 
 - ![add](plus.png) [app/controllers/posts_controllers.rb] 
-```ruby
+```rb
 	def index
 	end
 ```
@@ -55,7 +55,7 @@ validates_presence_of :date, :rationale
 
 - $ touch spec/features/post_spec.rb
 - ![add](plus.png) [spec/features/post_spec.rb]
-```ruby
+```rb
 require 'rails_helper'
 
 describe 'navigate' do
@@ -75,22 +75,22 @@ describe 'navigate' do
 end
 ```
 - ![add](plus.png) [app/views/posts/index.html.erb]
-```html
+```erb
 <h1>Posts Index</h1>
 ```
 - $ rspec [which will succeed!]
 - ![add](plus.png) [db/seeds.rb]
-```ruby
+```rb
 100.times do |post|
   Post.create!(date: Date.today, rationale: "#{post} rationale content")
 end
-
 puts "100 posts have been created!"
 ```
+
 - $ rails db:setup
 
 - ![add](plus.png) [spec/features/post_spec.rb]
-```ruby
+```rb
 describe 'creation' do
   it 'has a new form that can be reached' do
     visit new_post_path
@@ -99,7 +99,7 @@ describe 'creation' do
 end
 ```
 - ![add](plus.png) [app/controllers/post_controller.rb]
-```ruby
+```rb
 def new
 end
 ```
@@ -107,7 +107,7 @@ end
 - $ rspec [which will succeed!]
 
 - ![add](plus.png) [spec/features/post_spec.rb]
-```ruby
+```rb
 describe 'creation' do
 .
 .
@@ -127,7 +127,7 @@ end
 - $ rspec [which will fail!]
 
 - ![add](plus.png) [app/controllers/posts_controller.rb]
-```ruby
+```rb
 def new
   @post = Post.new
 end
@@ -138,7 +138,7 @@ def create
 end
 ```
 - ![add](plus.png) [app/views/posts/new.html.erb]
-```rb
+```erb
 <%= form_for @post do |f| %>
   <%= f.date_field :date %>
   <%= f.text_area :rationale %>

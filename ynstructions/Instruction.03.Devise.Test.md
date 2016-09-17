@@ -4,12 +4,12 @@
 
 - $ rails generate devise:install
 - ![edit](edit.png) [config/environments/development.rb]
-```ruby
+```rb
 config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 ```
 - $ rails generate devise:views
 - ![edit](edit.png) [config/initializers/devise.rb]
-```ruby
+```rb
 config.mailer_sender = 'no-reply@abideinhope.net'
 ```
 - $ rails g devise User first_name:string last_name:string type:string
@@ -22,7 +22,7 @@ config.mailer_sender = 'no-reply@abideinhope.net'
 - ![add](plus.png) [group :development, :test] gem 'factory_girl_rails', '~> 4.7'
 - $ bundle
 - ![edit](edit.png) [spec/rails_helper.rb]
-```ruby
+```rb
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 
@@ -52,9 +52,8 @@ end
 - $ mkdir spec/factories
 - $ touch spec/factories/users.rb
 - ![add](plus.png) [spec/factories/users.rb]
-```ruby
+```rb
 FactoryGirl.define do 
-
 	factory :user do
 		email 'test@test.com'
 		first_name 'Daniel'
@@ -62,11 +61,10 @@ FactoryGirl.define do
 		password 'asdfasdf'
 		password_confirmation 'asdfasdf'
 	end
-
 end
 ```
 - ![edit](edit.png) [spec/model/user_spec.rb]
-```ruby
+```rb
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -90,7 +88,7 @@ RSpec.describe User, type: :model do
 end
 ```
 - ![add](plus.png) [app/models/user.rb]
-```ruby
+```rb
 validates_presence_of :first_name, :last_name
 ```
 

@@ -5,7 +5,7 @@
 - $ mkdir spec/features
 - $ touch spec/features/static_spec.rb
 - ![add](plus.png) [spec/features/static_spec.rb] 
-```ruby	
+```rb	
 require 'rails_helper'
 
 describe 'navigate' do
@@ -22,7 +22,7 @@ end
 - ![add](plus.png) [config/routes.rb] root to: 'static#homepage'
 - $ touch app/controllers/static_controller.rb
 - ![add](plus.png) [app/controllers/static_controller.rb]
-```ruby	
+```rb
 class StaticController < ApplicationController
 	def homepage
 	end
@@ -31,7 +31,7 @@ end
 - $ mkdir app/views/static
 - $ touch app/views/static/homepage.html.erb
 - ![add](plus.png) [app/views/static/homepage.html.erb]
-```html
+```erb
 <h1>This is Homepage Text for Test</h1>
 ```
 - $ rspec [which will succeed!]

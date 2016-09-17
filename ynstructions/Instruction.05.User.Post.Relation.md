@@ -117,3 +117,32 @@ end
 - $ rails server
 - [localhost:3000/users/sign_in] Sign In with Info Above
 - Enter information -> Test
+
+- ![add](plus.png) [app/views/layouts/application.html.rb]
+```erb
+  <head>
+	  <title>OvertimeAppKali</title>
+		.
+		.
+		.
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  <script>
+	  $( function() {
+	    $( "#datepicker" ).datepicker();
+	  } );
+	  </script>
+  </head>
+```
+- ![edit](edit.png) [app/views/posts/new.html.erb]
+```erb
+<%= form_for @post do |f| %>
+	
+	<%= f.date_field :date, :id => "datepicker" %> <<<
+	<%= f.text_area :rationale %>
+	
+	<%= f.submit 'Save' %>
+
+<% end %>
+```
+** Fixed the Datepicker Issue in FireFox Browser"

@@ -197,9 +197,9 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  capybara
+  capybara (~> 2.8)
   coffee-rails (~> 4.2)
-  database_cleaner
+  database_cleaner (~> 1.5)
   devise (~> 4.2)
   jbuilder (~> 2.5)
   jquery-rails

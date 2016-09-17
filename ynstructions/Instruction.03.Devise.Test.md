@@ -48,3 +48,50 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 end
 ```
+
+- $ mkdir spec/factories
+- $ touch spec/factories/users.rb
+- ![add](plus.png) [spec/factories/users.rb]
+```ruby
+FactoryGirl.define do 
+
+	factory :user do
+		email 'test@test.com'
+		first_name 'Daniel'
+		last_name 'Park'
+		password 'asdfasdf'
+		password_confirmation 'asdfasdf'
+	end
+
+end
+```
+- ![edit](edit.png) [spec/model/user_spec.rb]
+```ruby
+require 'rails_helper'
+
+RSpec.describe User, type: :model do
+
+  before do
+  	@user = FactoryGirl.create(:user)
+  end
+
+  describe "creation" do
+  	it "can be created" do
+  		expect(@user).to be_valid
+  	end
+
+  	it "cannot be created without first_name, last_name" do
+  		@user.first_name = nil
+  		@user.last_name = nil
+  		expect(@user).to_not be_valid
+  	end
+  end
+
+end
+```
+- ![add](plus.png) [app/models/user.rb]
+```ruby
+validates_presence_of :first_name, :last_name
+```
+
+- $ rspec [which will result in success!]

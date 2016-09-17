@@ -79,3 +79,12 @@ end
 <h1>Posts Index</h1>
 ```
 - $ rspec [which will result in success!]
+- ![add](plus.png) [db/seeds.rb]
+```ruby
+100.times do |post|
+  Post.create!(date: Date.today, rationale: "#{post} rationale content")
+end
+
+puts "100 posts have been created!"
+```
+- $ rails db:setup

@@ -30,7 +30,7 @@ end
 ```
 - $ mkdir app/views/static
 - $ touch app/views/static/homepage.html.erb
-- ![add](plus.png) 
+- ![add](plus.png) [app/views/static/homepage.html.erb]
 ```html
 <h1>This is Homepage Text for Test</h1>
 ```

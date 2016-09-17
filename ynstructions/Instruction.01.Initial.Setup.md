@@ -21,6 +21,7 @@
 - ![sub](minus.png) delete test folder
 - ![add](plus.png) [spec/rails_helper.rb] 
 ```ruby	
+
 	ENV['RAILS_ENV'] ||= 'test'
   require File.expand_path('../../config/environment', __FILE__)
 
@@ -43,4 +44,5 @@
 	  config.infer_spec_type_from_file_location!
 	  config.filter_rails_from_backtrace!
 	end
+
 ```

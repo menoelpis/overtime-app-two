@@ -21,14 +21,17 @@ end
 - $ rspec [which will result in failed test]
 - ![add](plus.png) [config/routes.rb] root to: 'static#homepage'
 - $ touch app/controllers/static_controller.rb
- ![add](plus.png) [app/controllers/static_controller.rb]
- ```ruby	
- class StaticController < ApplicationController
+![add](plus.png) [app/controllers/static_controller.rb]
+```ruby	
+class StaticController < ApplicationController
 	def homepage
 	end
 end
 ```
 - $ mkdir app/views/static
 - $ touch app/views/static/homepage.html.erb
-![add](plus.png) <h1>This is Homepage Text for Test</h1>
+![add](plus.png) 
+```html
+<h1>This is Homepage Text for Test</h1>
+```
 - $ rspec [which will result in success!]

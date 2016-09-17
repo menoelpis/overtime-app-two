@@ -9,11 +9,11 @@
 
 ## Gemfile Addition
 
-*![add](plus.png) gem 'pg' '~> 0.18'
-*![add](plus.png) gem 'devise' '~> 4.2'
-*![add](plus.png) [group :development, :test] gem 'rspec-rails', '~> 3.0' 
-*![add](plus.png) [group :development, :test] gem 'capybara', '~> 2.8' 
-*![add](plus.png) [group :development, :test] gem 'database_cleaner', '~> 1.5' 
+* ![add](plus.png) gem 'pg' '~> 0.18'
+* ![add](plus.png) gem 'devise' '~> 4.2'
+* ![add](plus.png) [group :development, :test] gem 'rspec-rails', '~> 3.0' 
+* ![add](plus.png) [group :development, :test] gem 'capybara', '~> 2.8' 
+* ![add](plus.png) [group :development, :test] gem 'database_cleaner', '~> 1.5' 
 
 # Rspec Installation
 

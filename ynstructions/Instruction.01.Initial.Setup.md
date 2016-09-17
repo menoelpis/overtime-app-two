@@ -9,7 +9,7 @@
 
 ## Gemfile Addition
 
-- [+] gem 'pg' '~> 0.18'
+![add](./images/plus.png) gem 'pg' '~> 0.18'
 - [+] gem 'devise' '~> 4.2'
 - [+:> group :development, :test] gem 'rspec-rails', '~> 3.0' 
 - [+:> group :development, :test] gem 'capybara', '~> 2.8' 

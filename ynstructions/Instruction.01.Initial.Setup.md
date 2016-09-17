@@ -1,4 +1,4 @@
-# Overtime Application Workflow
+# Overtime Application Workflow 01
 
 ## Initial Setup
 
@@ -21,7 +21,7 @@
 - ![sub](minus.png) delete test folder
 - ![add](plus.png) [spec/rails_helper.rb] 
 ```ruby	
-
+	
 	ENV['RAILS_ENV'] ||= 'test'
   require File.expand_path('../../config/environment', __FILE__)
 

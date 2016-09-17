@@ -4,8 +4,8 @@
 
 ## Models
 
-- Post -> date:date rationale:text
-- User -> Devise
+- ![check](ynstructions/check.png) Post -> date:date rationale:text
+- ![check](ynstructions/check.png) User -> Devise
 - AdminUser -> STI
 
 ## Features:

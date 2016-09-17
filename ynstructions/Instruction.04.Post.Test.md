@@ -124,7 +124,7 @@ describe 'creation' do
   end
 end
 ```
-- $ rspec [which will fail]
+- $ rspec [which will fail!]
 
 - ![add](plus.png) [app/controllers/posts_controller.rb]
 ```ruby
@@ -138,7 +138,7 @@ def create
 end
 ```
 - ![add](plus.png) [app/views/posts/new.html.erb]
-```ruby
+```rb
 <%= form_for @post do |f| %>
   <%= f.date_field :date %>
   <%= f.text_area :rationale %>
@@ -147,11 +147,11 @@ end
 ```
 - $ touch app/views/posts/show.html.erb
 - ![add](plus.png) [app/views/posts/show.html.erb]
-```ruby
+```erb
 <%= @post.inspect %>
 ```
 - ![add](plus.png) [app/controllers/posts_controller.rb]
-```ruby
+```rb
 def new
   @post = Post.new
 end
@@ -159,7 +159,7 @@ end
 def create
   @post = Post.new(params.require(:post).permit(:date, :rationale))
   @post.save
-  redirect_to @post
+  redirect_to @gitpost
 end
 
 def show

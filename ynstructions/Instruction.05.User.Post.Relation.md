@@ -118,6 +118,8 @@ end
 - [localhost:3000/users/sign_in] Sign In with Info Above
 - Enter information -> Test
 
+## Datepicker Issue [Do not add code below]
+
 - ![add](plus.png) [app/views/layouts/application.html.rb]
 ```erb
   <head>

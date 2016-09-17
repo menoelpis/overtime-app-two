@@ -54,6 +54,7 @@ validates_presence_of :date, :rationale
 - $ touch app/views/posts/index.html.erb [Add some content]
 
 - $ touch spec/features/post_spec.rb
+- ![add](plus.png) [spec/features/post_spec.rb]
 ```ruby
 require 'rails_helper'
 
@@ -64,9 +65,17 @@ describe 'navigate' do
 			visit root_path
 			expect(page.status_code).to eq(200)
 		end
+
+    it 'has a title of Post Index' do
+      visit posts_path
+      expect(page).to have_content(/Posts Index/)
+    end
 	end
 
 end
 ```
-
+- ![add](plus.png) [app/views/posts/index.html.erb]
+```html
+<h1>Posts Index</h1>
+```
 - $ rspec [which will result in success!]

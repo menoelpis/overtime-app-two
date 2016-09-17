@@ -34,4 +34,4 @@ end
 ```html
 <h1>This is Homepage Text for Test</h1>
 ```
-- $ rspec [which will result in success!]
+- $ rspec [which will succeed!]

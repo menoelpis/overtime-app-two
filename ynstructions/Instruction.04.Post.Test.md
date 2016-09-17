@@ -78,7 +78,7 @@ end
 ```html
 <h1>Posts Index</h1>
 ```
-- $ rspec [which will result in success!]
+- $ rspec [which will succeed!]
 - ![add](plus.png) [db/seeds.rb]
 ```ruby
 100.times do |post|
@@ -88,3 +88,81 @@ end
 puts "100 posts have been created!"
 ```
 - $ rails db:setup
+
+- ![add](plus.png) [spec/features/post_spec.rb]
+```ruby
+describe 'creation' do
+  it 'has a new form that can be reached' do
+    visit new_post_path
+    expect(page.status_code).to eq(200)
+  end
+end
+```
+- ![add](plus.png) [app/controllers/post_controller.rb]
+```ruby
+def new
+end
+```
+- $ touch app/views/posts/new.html.erb
+- $ rspec [which will succeed!]
+
+- ![add](plus.png) [spec/features/post_spec.rb]
+```ruby
+describe 'creation' do
+.
+.
+.
+  it 'can be created from new form page' do
+    visit new_post_path
+
+    fill_in 'post[date]', with: Date.today
+    fill_in 'post[rationale]', with: "Some Rationale"
+
+    click_on "Save"
+
+    expect(page).to have_content("Some Rationale")
+  end
+end
+```
+- $ rspec [which will fail]
+
+- ![add](plus.png) [app/controllers/posts_controller.rb]
+```ruby
+def new
+  @post = Post.new
+end
+
+def create
+  @post = Post.find(params[:id])
+  @post.save
+end
+```
+- ![add](plus.png) [app/views/posts/new.html.erb]
+```ruby
+<%= form_for @post do |f| %>
+  <%= f.date_field :date %>
+  <%= f.text_area :rationale %>
+  <%= f.submit 'Save' %>
+<% end %>
+```
+- $ touch app/views/posts/show.html.erb
+- ![add](plus.png) [app/views/posts/show.html.erb]
+```ruby
+<%= @post.inspect %>
+```
+- ![add](plus.png) [app/controllers/posts_controller.rb]
+```ruby
+def new
+  @post = Post.new
+end
+
+def create
+  @post = Post.new(params.require(:post).permit(:date, :rationale))
+  @post.save
+  redirect_to @post
+end
+
+def show
+  @post = Post.find(params[:id])
+end
+```

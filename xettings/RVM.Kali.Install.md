@@ -34,4 +34,8 @@
 
 - [root] $ gem install sqlite3
 
-- [root] @ rvm use ruby-2.3.1@rails5.0
+- [root] $ rvm use ruby-2.3.1@rails5.0
+
+- [root] $ nano ~/.irbrc [+] IRB.conf[:PROMPT_MODE] = :SIMPLE
+
+- [root] $ nano /etc/modprobe.d/blacklist-libnfc.conf [+] blacklist intel_rapl

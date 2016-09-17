@@ -94,4 +94,4 @@ end
 validates_presence_of :first_name, :last_name
 ```
 
-- $ rspec [which will result in success!]
+- $ rspec [which will succeed!]

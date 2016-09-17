@@ -112,7 +112,7 @@ end
 ** It will authenticate all users 
 
 - $ rails console
-- > User.create!(first_name: "Daniel"...) <
+- > User.create!(first_name: "Daniel"...) >
 
 - $ rails server
 - [localhost:3000/users/sign_in] Sign In with Info Above

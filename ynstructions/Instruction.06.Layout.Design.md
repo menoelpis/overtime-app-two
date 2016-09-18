@@ -91,3 +91,77 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
     });
 </script>
 ```
+
+- $ mkdir app/views/shared
+- $ touch app/views/shared/_nav.html.erb
+- $ rails routes | grep user
+
+- ![add](plus.png) [app/views/shared/_nav.html.erb]
+```erb
+<div class="logo">
+  <h1>Time Tracker</h1>
+</div>
+
+<ul class="custom-nav nav nav-tabs">
+  <li class="active">
+    <%= link_to "Home", root_path %>
+  </li>
+  <li>
+    <%= link_to "Time Entries", posts_path %>
+  </li>
+  <li class="dropdown pull-right">
+     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Account<strong class="caret"></strong></a>
+    <ul class="dropdown-menu">
+      <li>
+        <%= link_to "Edit Details", edit_user_registration_path %>
+      </li>
+      <li class="divider">
+      </li>
+      <li>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+      </li>
+    </ul>
+  </li>
+</ul>
+```
+
+- ![edit](edit.png) [app/assets/stylesheets/application.css.scss]
+```scss
+.custom-nav {
+  margin-top: 20px;
+}
+```
+
+- ![edit](edit.png) [app/views/layouts/application.html.erb]
+```erb
+.
+.
+.
+<div class="container"> 
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'shared/nav' %>
+      <%= yield %>
+    </div>
+  </div>
+</div>
+.
+.
+.
+```
+
+- ![edit](edit.png) [app/views/static/homepage.html.erb]
+```erb
+<div class="jumbotron">
+  <h2>
+    Hello, world!
+  </h2>
+  <p>
+    This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
+  </p>
+  <p>
+    <a class="btn btn-primary btn-large" href="#">Learn more</a>
+  </p>
+</div>
+```
+

@@ -125,7 +125,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 </ul>
 ```
 
-- ![edit](edit.png) [app/assets/stylesheets/application.css.scss]
+- ![add](plus.png) [app/assets/stylesheets/application.css.scss]
 ```scss
 .custom-nav {
   margin-top: 20px;
@@ -165,3 +165,33 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 </div>
 ```
 
+## Application Helper Method for Active Page
+
+- ![add](plus.png) [helpers/application_helper.rb]
+```rb
+.
+.
+.
+def active?(path)
+  "active" if current_page?(path)
+end
+.
+.
+.
+```
+
+- ![edit](edit.png) [app/views/shared/_nav.html.erb]
+```erb
+.
+.
+.
+<li class="<%= active?(root_path) %>"> <<<
+  <%= link_to "Home", root_path %>
+</li>
+<li class="<%= active?(posts_path) %>">  <<<
+  <%= link_to "Time Entries", posts_path %>
+</li>
+.
+.
+.
+```

@@ -165,4 +165,46 @@ puts "100 posts have been created!"
 </table>
 ```
 
+## Custom Model Method for Full Name
+
+- ![add](plus.png) [spec/models/user_spec.rb]
+```rb
+.
+.
+.
+describe "custom name methods" do
+  it 'has a full name method that combines first and last name' do
+    expect(@user.full_name).to eq("PARK, DANIEL")
+  end
+end
+.
+.
+.
+```
+
+- ![add](plus.png) [app/models/user.rb]
+```rb
+.
+.
+.
+def full_name
+	last_name.upcase + ", " + first_name.upcase
+end
+.
+.
+.
+```
+
+- ![edit](edit.png) [app/views/posts/_post.html.erb]
+```erb
+.
+.
+.
+<td>
+	<%= post.user.full_name %>
+</td>
+.
+.
+.
+```
 

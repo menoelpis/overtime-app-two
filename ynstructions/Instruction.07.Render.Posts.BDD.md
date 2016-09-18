@@ -131,3 +131,38 @@ end
 puts "100 posts have been created!"
 ```
 
+## Refactoring the Index Action for Best Practice
+
+- $ touch app/views/posts/_post.html.erb
+- ![add](plus.png) [app/views/posts/_post.html.erb]
+```erb
+<tr>
+	<td>
+		<%= post.id %>
+	</td>
+	<td>
+		<%= post.date %>
+	</td>
+	<td>
+		<%= post.user.last_name %>
+	</td>
+	<td>
+		<%= truncate(post.rationale) %>
+	</td>
+</tr>
+```
+- ![edit](edit.png) [app/views/posts/index.html.erb]
+```erb
+<h1>Posts Index</h1>
+
+<table class="table table-striped table-hover">
+.
+.
+.
+	<tbody>
+		<%= render @posts %> <<<
+	</tbody>
+</table>
+```
+
+

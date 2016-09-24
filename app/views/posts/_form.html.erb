@@ -1,0 +1,24 @@
+<%= form_for @post do |f| %>
+    <div class="col-sm-3">
+      <div class="form-group">
+          <div class='input-group date' id='datetimepicker1'>
+              <%= f.date_field :date %>
+              <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar">
+                  </span>
+              </span>
+          </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <div class='input-group text'>
+                <%= f.text_area :rationale %>
+            </div>
+        </div>
+    </div>
+	
+	<%= f.submit 'Save' %>
+
+<% end %>
+

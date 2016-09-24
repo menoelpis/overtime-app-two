@@ -53,4 +53,28 @@ describe 'navigate' do
 		end
 	end
 
+	describe 'edit' do
+		before do
+			@post = FactoryGirl.create(:post)
+		end
+
+		it 'cat be reached by clicking edit on index page' do
+			post = FactoryGirl.create(:post)
+			visit posts_path
+
+			click_link("edit_#{@post.id}")
+			expect(page.status_code).to eq(200)
+		end
+
+		it 'can be edited' do
+			visit edit_post_path(@post)
+
+			fill_in 'post[date]', with: Date.today
+			fill_in 'post[rationale]', with: "Edited Content"
+			click_on "Save"
+
+			expect(page).to have_content("Edited Content")
+		end
+	end
+
 end

@@ -154,3 +154,49 @@ end
     });
 </script>
 ```
+
+- ![add](plus.png) [spec/features/post_spec.rb]
+```rb
+describe 'navigate' do
+.
+.
+.
+	describe 'new' do   <<<
+		it 'has a link from the home page' do
+			visit root_path
+
+			click_link("new_post_from_nav")
+			expect(page.status_code).to eq(200)
+		end
+	end
+
+	describe 'creation' do
+	.
+	.
+	.
+	end
+
+	describe 'edit' do
+	.
+	.
+	.
+	end
+end
+
+- ![add](plus.png) [app/views/shared/_nav.html.erb]
+```erb
+<ul class="custom-nav nav nav-tabs">
+	<li class="<%= active?(root_path) %>">
+		<%= link_to "Home", root_path %>
+	</li>
+	<li class="<%= active?(posts_path) %>">
+		<%= link_to "Time Entries", posts_path %>
+	</li>
+	<li class="<%= active?(new_post_path) %>">   <<<
+		<%= link_to "Add New Entry", new_post_path, id: 'new_post_from_nav' %>
+	</li>
+	.
+	.
+	.
+</ul>
+```

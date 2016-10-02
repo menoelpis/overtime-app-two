@@ -365,3 +365,28 @@ gem 'gritter', '1.2.0'
 </body>
 </html>
 ```
+
+- ![edit](edit.png) [app/views/posts/_form.html.erb] *added notification for errors*
+```erb
+<%= form_for @post, class: "form-horizontal" do |f| %>
+
+	<% if @post.errors.any? %>   <<<
+		<% @post.errors.full_messages.each do |error| %>
+		  <%= js add_gritter(error, title: "Overtime App Notification", sticky: false) %>
+		 <% end %>
+	<% end %>
+  
+  <div class="form-group">
+    <%= f.label :date, class: "col-sm-2 control-label" %>
+    <%= f.date_field :date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :rationale, class: "col-sm-2 control-label" %>
+    <%= f.text_area :rationale, class: "form-control" %>
+  </div>
+
+  <%= f.submit 'Save', class: 'btn btn-primary btn-block' %>
+
+<% end %>
+```

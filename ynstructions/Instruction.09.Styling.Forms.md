@@ -35,3 +35,45 @@
   </div>
 </div>
 ```
+
+ - ![edit](edit.png) [config/routes.rb] *remove registrations routes*
+```rb
+Rails.application.routes.draw do
+  resources :posts
+  devise_for :users, skip: [:registrations]   <<<
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: 'static#homepage'
+end
+```
+
+- ![edit](edit.png) [app/views/devise/shared/_links.html.erb] *erase all other links except below*
+```erb
+<%- if controller_name != 'sessions' %>
+  <%= link_to "Log in", new_session_path(resource_name) %><br />
+<% end -%>
+
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+<% end -%>
+```
+
+- ![edit](edit.png) [app/views/shared/_nav.html.erb] *temporary fix for admin dashboard link*
+```erb
+<div class="logo">
+	<h1>Time Tracker</h1>
+</div>
+.
+.
+.
+	<li class="dropdown pull-right">
+		 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Account<strong class="caret"></strong></a>
+		<ul class="dropdown-menu">
+			<li>
+				<%= link_to "TODO: Admin Dashboard", root_path %>   <<<
+			</li>
+			.
+			.
+			.
+		</ul>
+	</li>
+</ul>

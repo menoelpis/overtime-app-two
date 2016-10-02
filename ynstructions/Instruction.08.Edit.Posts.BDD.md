@@ -306,3 +306,25 @@ class PostsController < ApplicationController
 end
 ```
 - $ rspec [which will succeed]
+
+- ![edit](edit.png) [app/views/posts/_form.html.erb] *erase everything and replace*
+```erb
+<%= form_for @post, class: "form-horizontal" do |f| %>
+  
+  <div class="form-group">
+    <%= f.label :date, class: "col-sm-2 control-label" %>
+    <%= f.date_field :date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :rationale, class: "col-sm-2 control-label" %>
+    <%= f.text_area :rationale, class: "form-control" %>
+  </div>
+
+  <%= f.submit 'Save', class: 'btn btn-primary btn-block' %>
+
+<% end %>
+```
+- remove script partials for datetime picker from new and edit post erb files
+
+

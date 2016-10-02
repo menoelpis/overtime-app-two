@@ -6,7 +6,7 @@
 
 - ![check](ynstructions/check.png) Post -> date:date rationale:text
 - ![check](ynstructions/check.png) User -> Devise
-- AdminUser -> STI
+- ![check](ynstructions/check.png) AdminUser -> STI
 
 ## Features:
 

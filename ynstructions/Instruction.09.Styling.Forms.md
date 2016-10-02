@@ -1,3 +1,9 @@
+ Overtime Application Workflow 09
+
+ ## Styling Forms for Session LogIn
+
+ - ![edit](edit.png) [app/views/devise/sessions/new.html.erb] *restyle session login form using bootstrap*
+```erb
 <h2>Log in</h2>
 
 <div class="row">
@@ -28,5 +34,4 @@
     <%= render "devise/shared/links" %>
   </div>
 </div>
-
-
+```

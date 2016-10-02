@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require bootstrap-sprockets
+//= require gritter
 //= require moment
 //= require bootstrap-datetimepicker
 //= require jquery_ujs

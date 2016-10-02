@@ -325,6 +325,42 @@ end
 
 <% end %>
 ```
-- remove script partials for datetime picker from new and edit post erb files
+- *remove script partials for datetime picker from new and edit post erb files*
 
+- ![add](plus.png) [Gemfile] 
+```rb
+gem 'gritter', '1.2.0'
 
+- ![add](plus.png) [app/assets/javascripts/application.js] 
+```js
+.
+.
+.
+//= require bootstrap-sprockets
+//= require gritter   <<<
+.
+.
+.
+```
+
+- ![add](plus.png) [app/assets/stylesheets/application.css.scss] 
+```scss
+.
+.
+.
+@import "gritter";   <<<
+.
+.
+.
+```
+
+- ![add](plus.png) [app/views/layouts/application.html.erb]
+```erb
+	.
+  .
+	. 
+	<%= js add_gritter(flash[:notice], title: "Overtime App Notification", sticky: false) %>   <<<
+
+	</body>
+</html>
+```

@@ -13,6 +13,7 @@ gem 'devise',                          '~> 4.2'
 gem 'bootstrap-sass',                  '~> 3.3'
 gem 'momentjs-rails',                  '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
+gem 'gritter',                         '1.2.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri

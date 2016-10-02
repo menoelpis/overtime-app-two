@@ -330,6 +330,7 @@ end
 - ![add](plus.png) [Gemfile] 
 ```rb
 gem 'gritter', '1.2.0'
+```
 
 - ![add](plus.png) [app/assets/javascripts/application.js] 
 ```javascript
@@ -356,11 +357,11 @@ gem 'gritter', '1.2.0'
 
 - ![add](plus.png) [app/views/layouts/application.html.erb]
 ```erb
-	.
-  .
-	. 
-	<%= js add_gritter(flash[:notice], title: "Overtime App Notification", sticky: false) %>   <<<
+.
+.
+. 
+<%= js add_gritter(flash[:notice], title: "Overtime App Notification", sticky: false) %>   <<<
 
-	</body>
+</body>
 </html>
 ```

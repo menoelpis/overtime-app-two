@@ -200,3 +200,109 @@ end
 	.
 </ul>
 ```
+
+- ![add](plus.png) [spec/features/post_spec.rb]
+```rb
+describe 'navigate' do
+.
+.
+.
+	describe 'new' do   <<<
+	.
+	.
+	.
+	end
+
+	describe 'delete' do
+		it 'can be deleted' do
+			@post = FactoryGirl.create(:post)
+			visit posts_path
+
+			click_link("delete_post_#{@post.id}_from_index")
+			expect(page.status_code).to eq(200)
+		end
+	end
+	.
+	.
+	.
+end
+```
+
+- $ rspec [which fails: unable to find link "delete_post..."]
+
+- ![add](plus.png) [app/views/posts/index.html.erb] *add empty table header*
+```erb
+<h1>Posts Index</h1>
+
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th>
+				#
+			</th>
+			<th>
+				Date
+			</th>
+			<th>
+				User
+			</th>
+			<th>
+				Rationale
+			</th>
+			<th></th>
+			<th></th>   <<<
+		</tr>
+	</thead>
+	<tbody>
+		<%= render @posts %>
+	</tbody>
+</table>
+```
+
+- ![add](plus.png) [app/views/posts/_post.html.erb] 
+```erb
+<tr>
+	<td>
+		<%= post.id %>
+	</td>
+	<td>
+		<%= post.date %>
+	</td>
+	<td>
+		<%= post.user.full_name %>
+	</td>
+	<td>
+		<%= truncate(post.rationale) %>
+	</td>
+	<td>
+		<%= link_to 'Edit', edit_post_path(post), id: "edit_#{post.id}" %>
+	</td>
+	<td>   <<<
+		<%= link_to 'Delete', post_path(post), method: :delete, id: "delete_post_#{post.id}_from_index", data: { confirm: 'Are you sure?'}  %>
+	</td>
+</tr>
+```
+
+- $ rspec [which fails: the action 'destroy' could not be...]
+
+- ![add](plus.png) [app/controllers/posts_controller.rb] 
+```rb
+class PostsController < ApplicationController
+	before_action :set_post, only: [:show, :edit, :update, :destroy]   <<<
+	.
+	.
+	.
+
+	def show
+	end
+
+	def destroy   <<<
+		@post.delete
+		redirect_to posts_path, notice: 'Your post was deleted successfully'
+	end
+	.
+	.
+	.
+end
+```
+- $ rspec [which will succeed]

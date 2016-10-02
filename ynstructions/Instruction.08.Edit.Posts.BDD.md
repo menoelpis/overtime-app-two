@@ -207,13 +207,13 @@ describe 'navigate' do
 .
 .
 .
-	describe 'new' do   <<<
+	describe 'new' do   
 	.
 	.
 	.
 	end
 
-	describe 'delete' do
+	describe 'delete' do   <<<
 		it 'can be deleted' do
 			@post = FactoryGirl.create(:post)
 			visit posts_path

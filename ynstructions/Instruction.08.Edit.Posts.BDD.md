@@ -332,7 +332,7 @@ end
 gem 'gritter', '1.2.0'
 
 - ![add](plus.png) [app/assets/javascripts/application.js] 
-```js
+```javascript
 .
 .
 .

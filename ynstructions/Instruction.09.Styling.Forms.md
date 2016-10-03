@@ -1,8 +1,8 @@
- Overtime Application Workflow 09
+# Overtime Application Workflow 09
 
- ## Styling Forms for Session LogIn
+## Styling Forms for Session LogIn
 
- - ![edit](edit.png) [app/views/devise/sessions/new.html.erb] *restyle session login form using bootstrap*
+- ![edit](edit.png) [app/views/devise/sessions/new.html.erb] *restyle session login form using bootstrap*
 ```erb
 <h2>Log in</h2>
 
@@ -36,7 +36,7 @@
 </div>
 ```
 
- - ![edit](edit.png) [config/routes.rb] *remove registrations routes*
+- ![edit](edit.png) [config/routes.rb] *remove registrations routes*
 ```rb
 Rails.application.routes.draw do
   resources :posts

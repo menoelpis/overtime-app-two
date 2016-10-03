@@ -1,10 +1,10 @@
- Overtime Application Workflow 08
+# Overtime Application Workflow 08
 
- ## Implement Ability to Edit Posts via BDD
+## Implement Ability to Edit Posts via BDD
 
- - ![add](plus.png) [spec/features/post_spec.rb]
- ```rb
- describe 'navigate' do
+- ![add](plus.png) [spec/features/post_spec.rb]
+```rb
+describe 'navigate' do
  .
  .
  .

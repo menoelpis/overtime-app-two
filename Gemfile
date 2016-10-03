@@ -14,6 +14,8 @@ gem 'bootstrap-sass',                  '~> 3.3'
 gem 'momentjs-rails',                  '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 gem 'gritter',                         '1.2.0'
+gem 'administrate', github: 'greetpoint/administrate', branch: 'rails5'
+gem 'bourbon',                         '~> 4.2'
 
 group :development, :test do
   gem 'byebug', platform: :mri

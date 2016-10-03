@@ -6,7 +6,7 @@
 
 - ![check](ynstructions/check.png) Post -> date:date rationale:text
 - ![check](ynstructions/check.png) User -> Devise
-- ![check](ynstructions/check.png) AdminUser -> STI
+- ![check](ynstructions/check.png) AdminUser -> STI(Single Table Inheritance)
 
 ## Features:
 

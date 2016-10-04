@@ -31,3 +31,49 @@ end
 >> Post.last.approved!
 >> Post.approved.count 
 ```
+
+- ![add](plus.png) [db/seeds.rb]
+```rb
+.
+.
+.
+AdminUser.create(email: "admin@test.com", password: "asdfasdf", password_confirmation: "asdfasdf", first_name: "Admin", last_name: "Park")
+
+puts "1 admin user created"
+.
+.
+.
+```
+
+- ![edit](edit.png) [app/controllers/dashboards/admin_user.dashboard.rb] *modify admin user dashboard to show status*
+```rb
+require "administrate/base_dashboard"
+
+class PostDashboard < Administrate::BaseDashboard
+  ATTRIBUTE_TYPES = {
+    .
+    .
+    .
+    updated_at: Field::DateTime.with_options(searchable: false),
+    status: Field::Text.with_options(searchable: true),   <<<
+  }.freeze
+
+  COLLECTION_ATTRIBUTES = [
+    :user,
+    :status,   <<<
+    :date,
+    :rationale,
+  ].freeze
+
+  SHOW_PAGE_ATTRIBUTES = [
+    :user,
+    :status,   <<<
+    .
+    .
+    .
+  ].freeze
+  .
+  .
+  .
+end
+```

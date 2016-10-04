@@ -350,3 +350,5 @@ module Admin
   end
 end
 ```
+
+- $ rspec [which will succeed]

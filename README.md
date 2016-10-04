@@ -12,8 +12,8 @@
 
 - Approval Workflow
 - SMS Sending -> link to approval or overtime input
-- Administrate admin dashboard
-- Block non admin adn guest users
+- ![check](ynstructions/check.png) Administrate admin dashboard
+- ![check](ynstructions/check.png) Block non admin adn guest users
 - Email summary to managers for approval
 - Need to be documented if employee did not log overtime
 
@@ -21,7 +21,7 @@
 
 - ![check](ynstructions/check.png) Bootstrap -> formatting
 - Icons from Font Awesome
-- Update the styles for forms
+- ![check](ynstructions/check.png) Update the styles for forms
 
 ## Refactor TODOS:
 - ![check](ynstructions/check.png) Add full_name method for users

@@ -156,3 +156,77 @@ end
 ```
 
 - $ rspec [which will succeed]
+
+- ![add](plus.png) [spec/features/approval_workflow_spec.rb] *add test for non admin access on form status*
+```rb
+require 'rails_helper'
+
+describe 'navigate' do
+	before do
+		@admin_user = FactoryGirl.create(:admin_user)
+		login_as(@admin_user, :scope => :user)
+	end
+
+	describe 'edit' do 
+		before do
+			@post = FactoryGirl.create(:post)
+			visit edit_post_path(@post)
+		end
+
+		it 'has a status that can be edited on the form by an admin' do 
+			choose('post_status_approved')
+			click_on "Save"
+
+			expect(@post.reload.status).to eq('approved')
+		end
+
+		it 'cannot be edited by a non admin' do
+			logout(:user)
+			user = FactoryGirl.create(:user)
+			login_as(user, :scope => :user)
+
+			visit edit_post_path(@post)
+
+			expect(page).to_not have_content('Approved')
+		end
+	end
+end
+```
+
+- $ touch app/views/posts/_status.html.erb
+
+- ![add](plus.png) [app/views/posts/_status.html.erb]
+```erb
+<div class="form-group">
+  <%= f.radio_button :status, 'submitted' %>
+  <%= f.label :status, 'Submitted' %>
+
+  <%= f.radio_button :status, 'approved' %>
+  <%= f.label :status, 'Approved' %>
+
+  <%= f.radio_button :status, 'rejected' %>
+  <%= f.label :status, 'Rejected' %>
+</div>
+```
+
+- ![edit](edit.png) [app/views/posts/_form.html.erb]
+```erb
+<%= form_for @post, class: "form-horizontal" do |f| %>
+
+	.
+	.
+	.
+
+  <div class="form-group">
+    <%= f.label :rationale, class: "col-sm-2 control-label" %>
+    <%= f.text_area :rationale, class: "form-control" %>
+  </div>
+
+  <%= render partial: 'status', locals: { f: f } if current_user.type == 'AdminUser' %>   <<<
+
+  <%= f.submit 'Save', class: 'btn btn-primary btn-block' %>
+
+<% end %>
+```
+
+- $ rspec [which will pass!]

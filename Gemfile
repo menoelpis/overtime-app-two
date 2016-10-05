@@ -16,6 +16,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 gem 'gritter',                         '1.2.0'
 gem 'administrate', github: 'greetpoint/administrate', branch: 'rails5'
 gem 'bourbon',                         '~> 4.2'
+gem 'pundit',                          '~>1.1'
 
 group :development, :test do
   gem 'byebug', platform: :mri

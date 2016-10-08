@@ -137,6 +137,18 @@ describe 'edit' do
 end
 ```
 
+- $ touch app/views/shared/_alerts.html.erb
+- ![add](plus.png) [app/views/shared/_alerts.html.erb] *quick fix for gritter message*
+```erb
+<% if flash[:alert] %>
+  <%= js add_gritter(flash[:alert], title: "Overtime App Alert", sticky: false) %>
+<% elsif flash[:error] %>
+  <%= js add_gritter(flash[:error], title: "Overtime App Error", sticky: false) %>
+<% else %>
+  <%= js add_gritter(flash[:notice], title: "Overtime App Notification", sticky: false) %>
+<% end %>
+```
+
 - ![edit](edit.png) [app/views/layouts/application.html.erb]
 ```erb
 <!DOCTYPE html>
@@ -150,14 +162,10 @@ end
   .
   .
   .
-  <% if flash[:alert] %>   <<<
-    <%= js add_gritter(flash[:alert], title: "Overtime App Alert", sticky: false) %>
-  <% elsif flash[:error] %>
-    <%= js add_gritter(flash[:error], title: "Overtime App Error", sticky: false) %>
-  <% else %>
-    <%= js add_gritter(flash[:notice], title: "Overtime App Notification", sticky: false) %>
-  <% end %>
+
+  <%= render 'shared/alerts' %>
 
   </body>
 </html>
+
 ```

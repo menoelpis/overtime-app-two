@@ -136,3 +136,28 @@ describe 'edit' do
 	end
 end
 ```
+
+- ![edit](edit.png) [app/views/layouts/application.html.erb]
+```erb
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OvertimeAppKali</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  .
+  .
+  .
+  <% if flash[:alert] %>   <<<
+    <%= js add_gritter(flash[:alert], title: "Overtime App Alert", sticky: false) %>
+  <% elsif flash[:error] %>
+    <%= js add_gritter(flash[:error], title: "Overtime App Error", sticky: false) %>
+  <% else %>
+    <%= js add_gritter(flash[:notice], title: "Overtime App Notification", sticky: false) %>
+  <% end %>
+
+  </body>
+</html>
+```

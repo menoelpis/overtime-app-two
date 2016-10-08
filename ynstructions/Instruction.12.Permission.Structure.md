@@ -76,3 +76,63 @@ class PostsController < ApplicationController
 	.
 	.
 ```
+
+- ![add](plus.png) [spec/factories/users.rb] *add non authorized user*
+```rb
+factory :non_authorized_user, class: "User" do
+	email { generate :email }
+	first_name 'Non'
+	last_name 'Authorized'
+	password 'asdfasdf'
+	password_confirmation 'asdfasdf'
+end
+```
+
+- ![add](plus.png) [app/controllers/application_controller.rb]
+```rb
+class ApplicationController < ActionController::Base
+	include Pundit
+  protect_from_forgery with: :exception
+  before_action :authenticate_user!
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized   <<<
+
+  private
+
+  	def user_not_authorized
+  		flash[:alert] = "You are not authorized to perform this action."
+  		redirect_to(root_path)
+  	end
+end
+```
+
+- ![edit](edit.png) [spec/features/post_spec.rb] *quick fix for post edit error*
+```rb
+describe 'edit' do
+	before do   <<<
+		@edit_user = User.create(first_name: "Edit", last_name: "user", email: "edit@user.com", password: "asdfasdf", password_confirmation: "asdfasdf")
+		login_as(@edit_user, :scope => :user)
+		@edit_post = Post.create(date: Date.today, rationale: "asdf", user_id: @edit_user.id)
+	end
+
+	it 'can be edited' do
+		visit edit_post_path(@edit_post)   <<<
+
+		fill_in 'post[date]', with: Date.today
+		fill_in 'post[rationale]', with: "Edited Content"
+		click_on "Save"
+
+		expect(page).to have_content("Edited Content")
+	end
+
+	it 'cannot be edited by a non authorized user' do
+		logout(:user)
+		non_authorized_user = FactoryGirl.create(:non_authorized_user)
+		login_as(non_authorized_user, :scope => :user)
+
+		visit edit_post_path(@edit_post)   <<<
+
+		expect(current_path).to eq(root_path)
+	end
+end
+```

@@ -247,7 +247,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3)
   bootstrap3-datetimepicker-rails (~> 4.17.42)
   bourbon (~> 4.2)
-  byebug
+  byebug (~> 9.0)
   capybara (~> 2.8)
   coffee-rails (~> 4.2)
   database_cleaner (~> 1.5)

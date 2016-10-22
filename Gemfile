@@ -19,8 +19,8 @@ gem 'bourbon',                         '~> 4.2'
 gem 'pundit',                          '~>1.1'
 
 group :development, :test do
-  gem 'byebug', platform: :mri
-  gem 'rspec-rails',                   '~>3.0'
+  gem 'byebug',                        '~> 9.0'
+  gem 'rspec-rails',                   '~> 3.0'
   gem 'capybara',                      '~> 2.8' 
   gem 'database_cleaner',              '~> 1.5' 
   gem 'factory_girl_rails',            '~> 4.7'

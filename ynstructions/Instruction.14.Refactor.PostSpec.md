@@ -1,12 +1,18 @@
+# Overtime Application Workflow 14
+
+## Refactoring Post Spec
+
+- ![edit](edit.png) [spec/features/post_spec.rb]
+```rb
 require 'rails_helper'
 
 describe 'navigate' do
-	let(:user) { FactoryGirl.create(:user) }
-	let(:post) do 
+	let(:user) { FactoryGirl.create(:user) }   <<<
+	let(:post) do    <<<
 		Post.create(date: Date.today, rationale: "Rationale", user_id: user.id)
 	end
 	before do
-		login_as(user, :scope => :user)
+		login_as(user, :scope => :user)   <<<
 	end
 	
 	describe 'index' do
@@ -25,12 +31,12 @@ describe 'navigate' do
 		it 'has a list of posts' do
 			post1 = FactoryGirl.create(:post)
 			post2 = FactoryGirl.create(:second_post)
-			post2.update(user_id: user.id)
+			post2.update(user_id: user.id)   <<<
 			visit posts_path
 			expect(page).to have_content(/Post 1 Rationale | Post 2 Rationale/)
 		end
 
-		it 'has a scope so that only post creators can see their posts' do
+		it 'has a scope so that only post creators can see their posts' do   <<<
 			other_user = User.create(first_name: 'Non', last_name: 'Authorized', email: "nonauth@example.com", password: "asdfasdf", password_confirmation: 
 				"asdfasdf")
 			post_from_other_user = Post.create(date: Date.today, rationale: "This post shouldn't be seen", user_id: other_user.id)
@@ -50,7 +56,7 @@ describe 'navigate' do
 		end
 	end
 
-	describe 'delete' do
+	describe 'delete' do   <<<
 		it 'can be deleted' do
 			logout(:user)
 
@@ -92,9 +98,9 @@ describe 'navigate' do
 		end
 	end
 
-	describe 'edit' do
+	describe 'edit' do   <<<
 		it 'can be edited' do
-			visit edit_post_path(post)
+			visit edit_post_path(post)   <<<
 
 			fill_in 'post[date]', with: Date.today
 			fill_in 'post[rationale]', with: "Edited Content"
@@ -108,10 +114,11 @@ describe 'navigate' do
 			non_authorized_user = FactoryGirl.create(:non_authorized_user)
 			login_as(non_authorized_user, :scope => :user)
 
-			visit edit_post_path(post)
+			visit edit_post_path(post)   <<<
 
 			expect(current_path).to eq(root_path)
 		end
 
 	end
 end
+```

@@ -66,3 +66,23 @@ def index
 	@posts = current_user.posts   <<<
 end
 ```
+
+- Creating a Custom Database Query Scope
+
+- ![add](plus.png) [app/models/post.rb]
+```rb
+class Post < ApplicationRecord
+	enum status: { submitted: 0, approved: 1, rejected: 2 }
+	belongs_to :user
+	validates_presence_of :date, :rationale
+
+	scope :posts_by, ->(user) { where(user_id: user.id) }   <<<
+end
+```
+
+- ![edit](edit.png) [app/controllers/posts_controller.rb]
+```rb
+def index
+	@posts = Post.posts_by current_user   <<<
+end
+```

@@ -20,6 +20,8 @@ config/secrets.yml
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/.env
+/.twilio_settings
 
 # Ignore Byebug command history file.
 .byebug_history

@@ -138,3 +138,18 @@ end
 </tr>
 ```
 
+## Hide the edit button when approved
+
+- ![edit](edit.png) [views/posts/_post.html.erb]
+```erb
+	.
+	.
+	.
+	<td>
+		<%= link_to 'Edit', edit_post_path(post), id: "edit_#{post.id}" if policy(post).update? %>   <<<
+	</td>
+	.
+	.
+	.
+</tr>
+

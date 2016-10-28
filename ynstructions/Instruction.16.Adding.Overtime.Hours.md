@@ -15,9 +15,9 @@ end
 
 - $ rails db:migrate
 
-## Find Post.create Method and Insert [overtime_request: some decimal value] in all the files
-## Insert [overtime_request: some value] into Factories/Posts
-## Insert [:overtime_request] into Post Model Presence Validation Method
+### Find Post.create Method and Insert [overtime_request: some decimal value] in all the files
+### Insert [overtime_request: some value] into Factories/Posts
+### Insert [:overtime_request] into Post Model Presence Validation Method
 
 - ![add](plus.png) [spec/models/post_spec.rb]
 ```rb

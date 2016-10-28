@@ -56,3 +56,85 @@ end
 ```
 
 - Test to post as a user -> change status as an admin -> try to edit as a user
+
+- ![edit](edit.png) [views/posts/index.html.erb]
+```erb
+		.
+		.
+		.
+			<th>
+				Rationale
+			</th>
+			<th>   <<<
+				Status
+			</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<%= render @posts %>
+	</tbody>
+</table>
+```
+
+- ![edit](edit.png) [views/posts/_post.html.erb]
+```erb
+<tr>
+	.
+	.
+	.
+	<td>
+		<%= truncate(post.rationale) %>
+	</td>
+	<td>
+		<%= post.status %>   <<<
+	</td>
+	.
+	.
+	.
+</tr>
+```
+
+## Change the status color
+
+- ![add](plus.png) [app/helpers/posts_helper.rb]
+```rb
+module PostsHelper
+	def status_label status 
+		status_span_generator status
+	end
+
+	private 
+
+		def status_span_generator status
+			case status
+			when 'submitted'
+				content_tag(:span, status.titleize, class: 'label label-primary')
+			when 'approved'
+				content_tag(:span, status.titleize, class: 'label label-success')
+			when 'rejected'
+				content_tag(:span, status.titleize, class: 'label label-danger')
+			end
+		end
+end
+```
+
+- ![edit](edit.png) [views/posts/_post.html.erb]
+```erb
+<tr>
+	.
+	.
+	.
+	<td>
+		<%= truncate(post.rationale) %>
+	</td>
+	<td>
+		<%= status_label post.status %>   <<<
+	</td>
+	.
+	.
+	.
+</tr>
+```
+

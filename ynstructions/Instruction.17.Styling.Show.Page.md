@@ -1,3 +1,20 @@
+# Overtime Application Workflow 17
+
+## Styling the Show Page View Template
+
+- ![edit](edit.png) [app/views/posts/_post.html.erb]
+```erb
+.
+.
+.
+<%= link_to truncate(post.rationale), post %>   <<<
+.
+.
+.
+```
+
+- ![edit](edit.png) [app/views/posts/show.html.erb]
+```erb
 <div>
 	<h2><%= @post.rationale %></h2>
 </div>
@@ -21,6 +38,4 @@
 </div>
 
 <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-primary' if policy(@post).update? %>
-
-
-
+```

@@ -15,7 +15,7 @@
 
 TWILIO_ACCOUNT_SID=YOURACCOUNTSID
 TWILIO_AUTH_TOKEN=YOURAUTHTOKEN
-TWILIO_PHONE_NUMBER=+821076580774
+TWILIO_PHONE_NUMBER=YOURPHONENUMBER
 
 - $ rails c [>> ENV['TWILIO_PHONE_NUMBER'] will result in the phone number above]
 
@@ -43,4 +43,4 @@ module SmsTool
 end
 ```
 
-- $ rails c [>> SmsTool.send_sms(number: 5555555, message: "my message")]
+- $ rails c [>> SmsTool.send_sms(number: 12345678, message: "my message")]

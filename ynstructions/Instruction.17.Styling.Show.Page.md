@@ -39,3 +39,33 @@
 
 <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-primary' if policy(@post).update? %>
 ```
+
+## Add Glyphicons to Edit and Delete for Posts Index
+
+- ![edit](edit.png) [app/views/posts/_post.html.erb]
+```erb
+	.
+	.
+	.
+		<%= link_to '', edit_post_path(post), id: "edit_#{post.id}", class: 'glyphicon glyphicon-pencil icons-edit-index' if policy(post).update? %>   <<<
+	</td>
+	<td>
+		<%= link_to '', post_path(post), method: :delete, id: "delete_post_#{post.id}_from_index", class: 'glyphicon glyphicon-trash icons-delete-index', data: { confirm: 'Are you sure?'} %>   <<<
+	</td>
+</tr>
+```
+
+- ![add](plus.png) [app/assets/stylesheets/posts.scss]
+```scss
+.icons-edit-index {
+	font-size: 1.2em;
+	text-decoration: none;
+	color: #058225;
+}
+
+.icons-delete-index {
+	font-size: 1.2em;
+	text-decoration: none;
+	color: #ab0303;
+}
+```

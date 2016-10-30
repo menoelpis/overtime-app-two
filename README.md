@@ -30,3 +30,7 @@
 - ![check](ynstructions/check.png) Refactor posts/_form for admin user with status
 - ![check](ynstructions/check.png) Fix post_spec.rb: to use factories
 - ![check](ynstructions/check.png) Fix post_spec.rb to have correct user reference and not require update
+- Integrate validation for phoe attr in User:
+	# No spaces or dashes
+	# all characters have to be a number
+	# exactly 10 characters

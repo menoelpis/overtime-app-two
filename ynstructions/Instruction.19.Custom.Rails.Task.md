@@ -209,3 +209,23 @@ validates :phone, length: { is: 10 }
 .
 ```
 
+- ![edit](edit.png) [lib/sms_tool.rb]
+```rb
+module SmsTool
+  account_sid = ENV['TWILIO_ACCOUNT_SID'] 
+  auth_token = ENV['TWILIO_AUTH_TOKEN'] 
+
+  @client = Twilio::REST::Client.new account_sid, auth_token 
+
+  def self.send_sms(number:, message:)
+    @client.messages.create(
+      from: ENV['TWILIO_PHONE_NUMBER'],
+      to: "+82#{number}",
+      body: "#{message}"
+    )
+  end
+end
+```
+
+- $ rails c
+- >> SmsTool.send_sms(number: '1076580774', message: "Look at me, I'm in a text!")

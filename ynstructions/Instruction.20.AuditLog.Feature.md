@@ -170,5 +170,95 @@ class AuditLogPolicy < ApplicationPolicy
 end
 ```
 
+- $ touch spec/features/audit_log_spec.rb
+- ![add](plus.png) [spec/features/audit_log_spec.rb]
+```rb
+require 'rails_helper'
+
+describe 'AuditLog Feature' do
+	let(:audit_log) { FactoryGirl.create(:audit_log) }
+
+	describe 'index' do
+		it 'has an index page that can be reached' do
+			visit audit_logs_path
+			expect(page.status_code).to eq(200)
+		end
+	end
+end
+```
+
+- ![edit](edit.png) [config/routes.rb]
+```rb
+Rails.application.routes.draw do
+  resources :audit_logs, except: [:new, :edit, :destroy]   <<<
+  .
+  .
+  .
+end
+```
+
+- ![add](plus.png) [app/controllers/audit_logs_controller.rb]
+```rb
+class AuditLogsController < ApplicationController
+	def index   <<<
+	end
+end
+```
+
+- $ touch app/views/audit_logs/index.html.erb
+
+- $ rspec spec/features/audit_log_spec.rb [which will succeed!]
+
+- ![edit](edit.png) [spec/features/audit_log_spec.rb]
+```rb
+require 'rails_helper'
+
+describe 'AuditLog Feature' do
+	describe 'index' do
+		before do
+			admin_user = FactoryGirl.create(:admin_user)
+			login_as(admin_user, :scope => :user)
+			FactoryGirl.create(:audit_log)   <<<
+		end
+
+		it 'has an index page that can be reached' do
+			visit audit_logs_path
+			expect(page.status_code).to eq(200)
+		end
+
+		it 'renders audit log content' do   <<<
+			visit audit_logs_path
+			expect(page).to have_content(/PARK, DANIEL/)
+		end
+
+		xit 'cannot be accessed by non admin users' do
+
+		end
+	end
+end
+```
+
+- ![add](plus.png) [app/controllers/audit_logs_controller.rb]
+```rb
+class AuditLogsController < ApplicationController
+	def index
+		@audit_logs = AuditLog.all   <<<
+	end
+end
+```
+
+![edit](edit.png) [app/views/audit_logs/index.html.erb]
+```erb
+<%= render @audit_logs %><br>
+```
+
+- $ touch app/views/audit_logs/_audit_log.html.erb
+- ![add](plus.png) [app/views/audit_logs/_audit_log.html.erb]
+```erb
+<%= audit_log.user.full_name %>
+```
+
+- $ rspec [which will succeed!]
+
 
 

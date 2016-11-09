@@ -266,5 +266,58 @@ end
 
 - $ rspec [which will succeed!]
 
+- ![edit](edit.png) [app/views/audit_logs/index.html.erb]
+```erb
+<h1>Audit Log Dashboard</h1>
+
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th>
+				#
+			</th>
+			<th>
+				Employee
+			</th>
+			<th>
+				Week Starting
+			</th>
+			<th>
+				confirmed At
+			</th>
+			<th>
+				Status
+			</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<%= render @audit_logs %>
+	</tbody>
+</table>
+```
+
+- ![edit](edit.png) [app/views/audit_logs/_audit_log.html.erb]
+```erb
+<tr>
+	<td>
+		<%= audit_log.id %>
+	</td>
+	<td>
+		<%= audit_log.user.full_name %>
+	</td>
+	<td>
+		<%= audit_log.start_date %>
+	</td>
+	<td>
+		<%= audit_log.end_date %>
+	</td>
+	<td>
+		<%= audit_log.status %>
+	</td>
+</tr>
+```
+
 
 

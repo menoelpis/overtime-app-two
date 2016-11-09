@@ -10,11 +10,7 @@
 * start_date:date -> default previous Monday
 * date_verified
 
-Monday
-|
-|
-|
-Sunday ---- notification
+Monday >>> Sunday ---- notification
 
 - $ rails g resource AuditLog user:references status:integer start_date:date end_date:date
 
@@ -48,9 +44,9 @@ end
 ```
 
 - $ rails c --sandbox
-- > AudigLog.create(user_id: User.last.id)
-- > User.last.audit_logs
-- > AuditLog.last.user.full_name
+- >>> AudigLog.create(user_id: User.last.id)
+- >>> User.last.audit_logs
+- >>> AuditLog.last.user.full_name
 
 - ![add](plus.png) [db/seeds.rb]
 ```rb
@@ -66,8 +62,8 @@ puts "100 audit logs have been created"
 
 - $ rails db:setup
 - $ rails c -e test
-- > FactoryGirl.create(:user)
-- > FactoryGirl.create(:audit_log)
+- >>> FactoryGirl.create(:user)
+- >>> FactoryGirl.create(:audit_log)
 
 ![edit](edit.png) [spec/models/audit_log_spec.rb]
 ```rb
@@ -124,7 +120,7 @@ end
 
 - $ rspec spec/models/audit_log_spec.rb [which will succeed!]
 - $ rails c --sandbox
-- > AuditLog.create(user_id: User.last.id) [Check if start_date is set]
+- >>> AuditLog.create(user_id: User.last.id) [Check if start_date is set]
 
 - $ touch app/views/shared/_audit_log_tab.html.erb
 - ![add](plus.png) [app/views/shared/_audit_log_tab.html.erb]

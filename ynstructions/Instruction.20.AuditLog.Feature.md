@@ -51,3 +51,20 @@ end
 - >> AudigLog.create(user_id: User.last.id)
 - >> User.last.audit_logs
 - >> AuditLog.last.user.full_name
+
+- ![add](plus.png) [db/seeds.rb]
+```rb
+.
+.
+.
+100.times do |audit_log|
+	AuditLog.create!(user_id: User.last.id, status: 0, start_date: (Date.today - 6.days))
+end
+
+puts "100 audit logs have been created"
+```
+
+- $ rails db:setup
+- $ rails c -e test
+- >> FactoryGirl.create(:user)
+- >> FactoryGirl.create(:audit_log)

@@ -68,3 +68,62 @@ puts "100 audit logs have been created"
 - $ rails c -e test
 - >> FactoryGirl.create(:user)
 - >> FactoryGirl.create(:audit_log)
+
+![edit](edit.png) [spec/models/audit_log_spec.rb]
+```rb
+require 'rails_helper'
+
+RSpec.describe AuditLog, type: :model do
+	before do
+		@audit_log = FactoryGirl.create(:audit_log)
+	end
+
+	describe 'creation' do
+		it 'can be properly created' do
+			expect(@audit_log).to be_valid
+		end
+	end
+
+	describe 'validations' do
+		it 'it should be required to have a user association' do
+			@audit_log.user_id = nil
+			expect(@audit_log).to_not be_valid
+		end
+
+		it 'it should always have a status' do
+			@audit_log.status = nil
+			expect(@audit_log).to_not be_valid
+		end
+
+		it 'it should be required to have a start_date' do
+			@audit_log.start_date = nil
+			expect(@audit_log).to_not be_valid
+		end
+
+		it 'it should have a start date equal to 6 days prior' do
+			new_audit_log = AuditLog.create(user_id: User.last.id)
+			expect(new_audit_log.start_date).to eq(Date.today - 6.days)
+		end
+	end
+end
+```
+
+- ![add](plus.png) [app/models/audit_log.rb]
+```rb
+class AuditLog < ApplicationRecord
+  belongs_to :user
+  validates_presence_of :user_id, :status, :start_date
+  after_initialize :set_defaults
+
+  private
+  	def set_defaults
+  		self.start_date ||= Date.today - 6.days
+  	end
+end
+```
+
+- $ rspec spec/models/audit_log_spec.rb [which will succeed!]
+- $ rails c --sandbox
+- >> AuditLog.create(user_id: User.last.id) [Check if start_date is set]
+
+

@@ -231,8 +231,13 @@ describe 'AuditLog Feature' do
 			expect(page).to have_content(/PARK, DANIEL/)
 		end
 
-		xit 'cannot be accessed by non admin users' do
+		it 'cannot be accessed by non admin users' do
+			logout(:user)
+			user = FactoryGirl.create(:user)
+			login_as(user, :scope => :user)
 
+			visit audit_logs_path
+			expect(current_path).to eq(root_path)
 		end
 	end
 end
@@ -243,6 +248,7 @@ end
 class AuditLogsController < ApplicationController
 	def index
 		@audit_logs = AuditLog.all   <<<
+		authorize @audit_logs
 	end
 end
 ```

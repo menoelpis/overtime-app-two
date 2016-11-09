@@ -126,4 +126,49 @@ end
 - $ rails c --sandbox
 - >> AuditLog.create(user_id: User.last.id) [Check if start_date is set]
 
+- $ touch app/views/shared/_audit_log_tab.html.erb
+- ![add](plus.png) [app/views/shared/_audit_log_tab.html.erb]
+```erb
+<li class="<%= active?(audit_logs_path) %>">
+	<%= link_to "Audit Log", audit_logs_path %>
+</li>
+```
+
+- ![add](plus.png) [app/views/shared/_nav.html.erb]
+```erb
+.
+.
+.
+<li class="<%= active?(posts_path) %>">
+	<%= link_to "Time Entries", posts_path %>
+</li>
+
+<!-- TODO: possibly refactor -->   <<<
+<%= render 'shared/audit_log_tab' if policy(AuditLog).index? %>
+
+<li class="<%= active?(new_post_path) %>">
+	<%= link_to "Add New Entry", new_post_path, id: 'new_post_from_nav' %>
+</li>
+.
+.
+.
+```
+
+- $ touch app/policies/audit_log_policy.rb
+- ![add](plus.png) [app/policies/audit_log_policy.rb]
+```rb
+class AuditLogPolicy < ApplicationPolicy
+	def index?
+		return true if admin?
+	end	
+
+	private 
+
+		def admin?
+			admin_types.include?(user.type)
+		end
+end
+```
+
+
 

@@ -42,11 +42,15 @@ end
 .homepage-block {
 	background-color: #1D3C91;
 	color: white;
-	margin: 15px;
+	margin: 12px 42px 12px 42px;
 	padding: 15px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+}
+
+.pending-details {
+	font-weight: 900;
 }
 ```
 
@@ -62,19 +66,22 @@ end
 .
 ```
 
+- ![add](plus.png) [app/controllers/static_controller.rb]
+```rb
+class StaticController < ApplicationController
+	def homepage
+		@pending_approvals = Post.where(status: 'submitted')   <<<
+	end
+end
+```
+
 - ![edit](edit.png) [app/views/static/_admin.html.erb]
 ```erb
 <div class="container-fluid">
 	<div class="pending-homepage row">
-		<div class="homepage-block col-md-3">
-			<p>asdf</p>
-		</div>
-			<div class="homepage-block col-md-3">
-			<p>asdf</p>
-		</div>
-			<div class="homepage-block col-md-3">
-			<p>asdf</p>
-		</div>
+		<h2>Items Pending Your Approval</h2>
+		<hr>
+		<%= render partial: 'pending_approval', locals: { pending_approvals: @pending_approvals } %>
 	</div>
 </div>
 
@@ -83,6 +90,31 @@ end
 		<p>asdf</p>
 	</div>
 </div>
+```
+
+- $ touch app/views/static/_pending_approval.html.erb
+- ![add](plus.png) [app/views/static/_pending_approval.html.erb]
+```erb
+<% @pending_approvals.each do |pending_approval| %>
+	<div class="homepage-block col-md-3">
+		<h4><%= pending_approval.user.full_name %></h4>
+		<p>
+			<span class="pending-details">Date Submitted:</span> <%= pending_approval.date %>
+		</p>
+		<p>
+			<span class="pending-details">Rationale:</span> <%= truncate pending_approval.rationale, length: 48 %>
+		</p>
+		<div class="row">
+			<div class="col-md-6 column">
+				<%= link_to 'Approve', root_path, class: 'btn btn-success btn-block' %>
+			</div>
+			<div class="col-md-6 column">
+				<%= link_to 'Review', root_path, class: 'btn btn-warning btn-block' %>
+			</div>
+		</div>
+
+	</div>
+<% end %>
 ```
 
 - ![edit](edit.png) [app/views/static/_employee.html.erb]

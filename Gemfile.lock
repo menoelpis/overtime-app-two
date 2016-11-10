@@ -266,6 +266,7 @@ DEPENDENCIES
   gritter (= 1.2.0)
   jbuilder (~> 2.5)
   jquery-rails
+  kaminari (~> 0.17)
   listen (~> 3.0.5)
   momentjs-rails (>= 2.9.0)
   pg (~> 0.18)

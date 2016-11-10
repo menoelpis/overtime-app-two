@@ -49,3 +49,5 @@ end
 .
 <%= paginate @audit_logs %>
 ```
+
+- $ rails g kaminari:views bootstrap3

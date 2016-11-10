@@ -315,5 +315,65 @@ end
 </tr>
 ```
 
+- ![add](plus.png) [app/models/audit_log.rb]
+```rb
+class AuditLog < ApplicationRecord
+	enum status: { pending: 0, confirmed: 1 }   <<<
+	.
+	.
+	.
+end
+```
+
+- $ rails s [check audit log tab]
+- $ rails c
+- >>> AuditLog.first
+- >>> AuditLog.first.confirmed!
+- >>> AuditLog.find(1)
+
+- Cut Status Label Method out from "posts_helper.rb" and Paste in "application_helper.rb"
+- ![add](plus.png) [app/helpers/application_helper.rb]
+```rb
+module ApplicationHelper
+	
+	def active?(path)
+		"active" if current_page?(path)
+	end
+
+	def status_label status   <<<
+		status_span_generator status
+	end
+
+	private 
+
+		def status_span_generator status
+			case status
+			when 'submitted'
+				content_tag(:span, status.titleize, class: 'label label-primary')
+			when 'approved'
+				content_tag(:span, status.titleize, class: 'label label-success')
+			when 'rejected'
+				content_tag(:span, status.titleize, class: 'label label-danger')
+			when 'pending'
+				content_tag(:span, status.titleize, class: 'label label-warning')   <<<
+			when 'confirmed'
+				content_tag(:span, status.titleize, class: 'label label-success')   <<<
+			end
+		end
+end
+```
+
+- ![edit](edit.png) [app/views/audit_logs/_audit_log.html.erb]
+```erb
+<tr>
+	.
+	.
+	.
+	<td>
+		<%= status_label audit_log.status %>   <<<
+	</td>
+</tr>
+```
+
 
 

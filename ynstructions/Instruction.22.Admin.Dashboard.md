@@ -106,10 +106,10 @@ end
 		</p>
 		<div class="row">
 			<div class="col-md-6 column">
-				<%= link_to 'Approve', root_path, class: 'btn btn-success btn-block' %>
+				<%= link_to 'Approve', root_path, class: 'btn btn-success btn-block', id: "approve_#{pending_approval.id}" %>
 			</div>
 			<div class="col-md-6 column">
-				<%= link_to 'Review', root_path, class: 'btn btn-warning btn-block' %>
+				<%= link_to 'Review', edit_post_path(pending_approval), class: 'btn btn-warning btn-block' %>
 			</div>
 		</div>
 
@@ -123,3 +123,95 @@ end
 ```
 
 - $ rails s [check homepage for both type of user]
+
+- $ touch spec/features/homepage_spec.rb
+- ![add](plus.png) [spec/features/homepage_spec.rb]
+```rb
+require 'rails_helper'
+
+describe 'Homepage' do
+	it 'allows the admin to approve posts from the homepage' do
+		post = FactoryGirl.create(:post)
+		admin_user = FactoryGirl.create(:admin_user)
+		login_as(admin_user, :scope => :user)
+
+		visit root_path
+
+		click_on("approve_#{post.id}")
+
+		expect(post.reload.status).to eq('approved')
+	end
+end
+```
+
+- $ rspec spec/features/homepage_spec.rb [which will fail!]
+
+- ![edit](edit.png) [config/routes.rb]
+```rb
+Rails.application.routes.draw do
+  resources :audit_logs, except: [:new, :edit, :destroy]
+  .
+  .
+  .
+  resources :posts do   <<<
+    member do
+      get :approve
+    end
+  end
+  devise_for :users, skip: [:registrations]
+  root to: 'static#homepage'
+end
+```
+
+- $ rails routes | grep approve [which will show the approve route]
+
+- ![add](plus.png) [app/controllers/posts_controller.rb]
+```rb
+class PostsController < ApplicationController
+	before_action :set_post, only: [:show, :edit, :update, :destroy, :approve]   <<<
+
+	def index
+		@posts = Post.posts_by(current_user).page(params[:page]).per(10)
+	end
+
+	def approve   <<<
+		authorize @post
+		@post.approved!
+		redirect_to root_path, notice: "The post has been approved"
+	end
+	.
+	.
+	.
+end
+```
+
+- ![add](plus.png) [app/policies/post_policy.rb]
+```rb
+class PostPolicy < ApplicationPolicy
+	def update?
+		return true if post_approved? && admin?
+		return true if user_or_admin && !post_approved?
+	end	
+
+	def approve?
+		admin?
+	end
+	.
+	.
+	.
+```
+
+- ![edit](edit.png) [app/views/static/_pending_approval.html.erb]
+```erb
+.
+.
+.
+<div class="col-md-6 column">
+	<%= link_to 'Approve', approve_post_path(pending_approval), class: 'btn btn-success btn-block', id: "approve_#{pending_approval.id}" %>   <<<
+</div>
+.
+.
+.
+```
+
+- $ rspec [which will succeed!]

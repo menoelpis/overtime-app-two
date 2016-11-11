@@ -215,3 +215,62 @@ class PostPolicy < ApplicationPolicy
 ```
 
 - $ rspec [which will succeed!]
+
+- ![edit](edit.png) [app/views/static/_admin.html.erb]
+```rb
+<div class="container-fluid">
+	<div class="pending-homepage row">
+		<h2>Items Pending Your Approval</h2>
+		<hr>
+		<%= render partial: 'pending_approval', locals: { pending_approvals: @pending_approvals } %>
+	</div>
+
+	<div class="pending-homepage row">
+		<h2>Confirmation Log</h2>
+		<hr>
+		<%= render partial: 'confirmation_log', locals: { recent_audit_items: @recent_audit_items } %>
+		<div class="clearfix"></div>
+		<hr>
+		<%= link_to 'View All Items', audit_logs_path, class: 'btn btn-primary' %>
+	</div>
+</div>
+```
+
+- ![add](plus.png) [app/controllers/static_controller.rb]
+```rb
+class StaticController < ApplicationController
+	def homepage
+		@pending_approvals = Post.where(status: 'submitted')
+		@recent_audit_items = AuditLog.last(10)
+	end
+end
+```
+
+- $ touch app/views/static/_confirmation_log.html.erb
+- ![add](plus.png) [app/views/static/_confirmation_log.html.erb]
+```rb
+<% @recent_audit_items.each do |recent_audit_item| %>
+	<div class="homepage-block col-md-3">
+		<h4><%= recent_audit_item.user.full_name %></h4>
+		<p>
+			<span class="pending-details">Week starting:</span> <%= recent_audit_item.start_date %>
+		</p>
+		<p>
+			<span class="pending-details">Confirmed at:</span> <%= recent_audit_item.end_date || status_label('pending') %>
+		</p>
+		<p>
+			<span class="pending-details">Status:</span> <%= status_label recent_audit_item.status %>
+		</p>
+	</div>
+<% end %>
+```
+
+- ![add](plus.png) [app/assets/stylesheets/admin_homepage.css] * hover effect on the block
+```css
+.
+.
+.
+.homepage-block:hover {
+	background-color: #172b63;
+}
+```

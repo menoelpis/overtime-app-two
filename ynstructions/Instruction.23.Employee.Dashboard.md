@@ -187,5 +187,24 @@ class StaticController < ApplicationController
 end
 ```
 
+- ![edit](edit.png) [app/views/static/_employee.html.erb]
+```erb
+<div class="container-fluid">
+	<div class="row">
+		<% if @pending_audit_confirmations.count > 0 %>   <<<
+			<div class="pending-homepage employee-blocks">
+				<h3>Pending Your Confirmation</h3>
+				<%= render partial: 'pending_audit_confirmations', locals: { pending_audit_confirmations: @pending_audit_confirmations } %>
+			</div>
+		<% end %>
+		<div class="pending-homepage employee-blocks">   <<<
+			<h3>Request Overtime</h3>
+			<%= link_to "Request Overtime Approval", new_post_path, class: 'btn btn-primary btn-block btn-lg' %>
+		</div>
+	</div>
+</div>
+```
+
+
 
 

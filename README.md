@@ -7,16 +7,16 @@
 - ![check](ynstructions/check.png) Post -> date:date rationale:text
 - ![check](ynstructions/check.png) User -> Devise
 - ![check](ynstructions/check.png) AdminUser -> STI(Single Table Inheritance)
-- AuditLog
+- ![check](ynstructions/check.png) AuditLog
 
 ## Features:
 
-- Approval Workflow
+- ![check](ynstructions/check.png) Approval Workflow
 - SMS Sending -> link to approval or overtime input -> integrate with Heroku scheduler
 - ![check](ynstructions/check.png) Administrate admin dashboard
 - ![check](ynstructions/check.png) Block non admin adn guest users
 - Email summary to managers for approval
-- Need to be documented if employee did not log overtime
+- ![check](ynstructions/check.png) Need to be documented if employee did not log overtime
 
 ## UI:
 
